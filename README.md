@@ -1,2 +1,2 @@
 # practice
-Solved programming challenges
+Solved programming challenges from Hackerrank
