@@ -1,0 +1,9 @@
+#ignore
+*
+# do not ignore
+!.gitignore
+!*.cpp
+!*.c
+!*.java
+!*.py
+!README.md
