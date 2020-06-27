@@ -1,16 +1,9 @@
-//#include <bits/stdc++.h>
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <string>
-#include <fstream>
-
-using namespace std;
-
-vector<string> split_string(string);
 
 // Complete the minimumSwaps function below.
-int minimumSwaps(vector<int> arr) 
+int minimumSwaps(std::vector<int> arr) 
 {
     int n = arr.size();
     int num_swaps = 0;
@@ -30,13 +23,13 @@ int minimumSwaps(vector<int> arr)
 int main()
 {
     int n;
-    cin >> n;
+    std::cin >> n;
 
-    vector<int> arr(n);
+    std::vector<int> arr(n);
     for (int i = 0; i < n; i++)
     {
         int temp;
-        cin >> temp;
+        std::cin >> temp;
         arr[i] = temp;
     }
 
