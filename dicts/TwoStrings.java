@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 import java.util.regex.*;
 import java.util.HashMap;
 
-public class twoStringsSolution {
+public class TwoStrings {
 
     // Complete the twoStrings function below.
     static String twoStrings(String s1, String s2) 
