@@ -16,46 +16,61 @@ public class CountTriplets {
     static long countTriplets(List<Long> arr, long r) 
     {
         long numTriplets = 0;
-        HashMap<Integer, List<Integer>> mapDoubles = new HashMap<>();
+        long n = arr.size();
 
-        for (Integer i = 0; i < arr.size(); i++)
+        HashMap<Long, Long> leftElems = new HashMap<>();
+        HashMap<Long, Long> rightElems = new HashMap<>();
+
+        for (int i = 0; i < n; i++)
         {
-            for (Integer j = 0; j < arr.size(); j++)
+            long elem = arr.get(i);
+            if (rightElems.containsKey(elem))
             {
-                if (arr.get(j) == arr.get(i) * r)
-                {
-                    if (! mapDoubles.containsKey(i))
-                    {
-                        mapDoubles.put(i, Arrays.asList(j));
-                    }
-                    else
-                    {
-                        ArrayList<Integer> secList = new ArrayList<Integer>(mapDoubles.get(i)); 
-                        secList.add(j);
-                        mapDoubles.put(i, secList);
-                    }
-
-                }
+                rightElems.put(elem, rightElems.get(elem)+1l);
+            }
+            else
+            {
+                rightElems.put(elem, 1l);
             }
         }
 
-        for (Integer key : mapDoubles.keySet())
+        for (int i = 0; i < n; i++)
         {
-            ArrayList<Integer> secondElems = new ArrayList<Integer>(mapDoubles.get(key));
-            for (Integer secElem : secondElems)
+            long leftCount = 0;
+            long rightCount = 0;
+
+            long elem = arr.get(i);
+
+            if (elem % r == 0)
             {
-                for (Integer k = secElem; k < arr.size(); k++)
+                if (leftElems.containsKey(elem/r))
                 {
-                    if (arr.get(k) == arr.get(secElem) * r)
-                    {
-                        numTriplets++;
-                    }
+                    leftCount = leftElems.get(elem/r);
                 }
             }
-        }
 
+            // in the subsequent iterations, even if there is an element a[i]*r to the left of a[i], do not take it into account
+            rightElems.put(elem, rightElems.get(elem)-1);
+
+            if (rightElems.containsKey(elem*r))
+            {
+                rightCount = rightElems.get(elem*r);
+            }
+
+            numTriplets += leftCount * rightCount;
+
+            // put a[i] to leftElems, it can be left element of another triplet with a middle element of value a[i]*r at a bigger index
+            if (leftElems.containsKey(elem))
+            {
+                leftElems.put(elem, leftElems.get(elem)+1l);
+            }
+            else
+            {
+                leftElems.put(elem, 1l);
+            }
+        }
+        
         return numTriplets;
-
     }
 
     public static void main(String[] args) throws IOException {
