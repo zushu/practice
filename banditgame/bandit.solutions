@@ -1,0 +1,50 @@
+Level 10->11:
+solution: base64 -d data.txt
+password: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+Level 11->12:
+solution: cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+password: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+Level 12->13:
+solution: i got the solution from smb else's file. you can't ls in /tmp, but you can cd into directories there, i tested a few random names and got one, and got the password from a file in there.
+cd /tmp
+cd john
+cat data8
+password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+original solution:
+mkdir /tmp/nese
+cp ~/data.txt /tmp/nese/data
+cd /tmp/nese
+cat data | xxd -r > new #reverse hexdump
+mv new new.gz
+gzip -d new.gz
+mv new new.bz2
+bzip2 -d new.bz2
+file new # prints: gzip compressed data...
+mv new new.gz
+gzip -d new.gz
+file new # prints: POSIX tar archive (GNU)
+mv new new.tar
+tar -xf new.tar
+ls # extracted file: data5.bin
+file data5.bin # prints: POSIX tar archive (GNU)
+tar -xf data5.bin # extracted file: data6.bin
+file data6.bin # prints: bzip2 compressed data, block size = 900k
+bzip2 -d data6.bin # prints: Can't guess original name for data6.bin -- using data6.bin.out
+file data6.bin.out # prints: POSIX tar archive (GNU)
+tar -xf data6.bin.out #extracted file: data8.bin
+file data8.bin # gzip compressed data
+mv data8.bin data8.bin.gz
+gzip -d data8.bin.gz
+file data8.bin # prints: ASCII text
+cat data8.bin  
+
+
+
+
+ 
+
+
+
